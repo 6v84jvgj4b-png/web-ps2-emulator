@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PS2 Web Station</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <!-- Cabeçalho -->
+        <header>
+            <h1>PS2 Web Station</h1>
+            <span id="gamepad-text">Comando: Desconectado</span>
+        </header>
+
+        <div id="main-content">
+            <!-- Painel Lateral: Configurações e Seletor de ISO -->
+            <aside id="settings-panel">
+                <h3>⚙️ Painel de Controlo</h3>
+                
+                <!-- Seletor de Ficheiro ISO -->
+                <div class="control-group">
+                    <label>Carregar Jogo:</label>
+                    <input type="file" id="iso-file-input" accept=".iso,.zip,.7z" style="display: none;" onchange="handleFileSelect(event)">
+                    <button id="btn-select-iso" onclick="document.getElementById('iso-file-input').click()">📁 Selecionar ISO</button>
+                    <span id="file-name">Nenhum ficheiro escolhido</span>
+                </div>
+
+                <hr style="border: 0; border-top: 1px solid #2a2a35; margin: 5px 0;">
+
+                <div class="control-group">
+                    <label>Qualidade Gráfica:</label>
+                    <select id="graphics-quality">
+                        <option value="low">Baixa (Performance)</option>
+                        <option value="medium" selected>Média (Equilibrada)</option>
+                        <option value="high">Alta (Nativa)</option>
+                    </select>
+                </div>
+
+                <div class="control-group">
+                    <label>Taxa de Quadros (FPS):</label>
+                    <select id="fps-limit">
+                        <option value="30">30 FPS</option>
+                        <option value="60" selected>60 FPS</option>
+                        <option value="unlocked">Desbloqueado</option>
+                    </select>
+                </div>
+
+                <button id="btn-apply" onclick="applySettings()">Aplicar Ajustes</button>
+            </aside>
+
+            <!-- Área do Emulador (Iframe Oficial) -->
+            <div id="emulator-screen">
+                <iframe id="emu-frame" src="https://playjs.purei.org" allow="fullscreen; gamepad; autoplay" frameborder="0"></iframe>
+            </div>
+        </div>
+
+        <!-- Barra de Ações Inferior -->
+        <div id="controls-bar">
+            <button id="btn-fullscreen" onclick="toggleFullScreen()">Tela Cheia ⛶</button>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
